@@ -9,7 +9,7 @@ from src.routes.user_routes import user_router
 
 # --- Configuración CORS ---
 cors_config = CORSConfig(
-    allow_origins=["*"], #Para entorno de Prueba
+    allow_origins=["https://frontend-cyc.onrender.com"], #Para entorno de Prueba
     allow_headers=["Authorization", "Content-Type"],
     allow_methods=["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     allow_credentials=True,
