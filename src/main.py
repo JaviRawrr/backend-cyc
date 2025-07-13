@@ -1,0 +1,39 @@
+from litestar import Litestar, Router
+from src.database import init_db    
+from litestar.config.cors import CORSConfig
+from litestar.openapi.config import OpenAPIConfig #Swagger
+
+# Importa Routers 
+from src.routes.auth_routes import auth_router
+from src.routes.user_routes import user_router
+
+# --- Configuración CORS ---
+cors_config = CORSConfig(
+    allow_origins=["*"], #Para entorno de Prueba
+    allow_headers=["Authorization", "Content-Type"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    allow_credentials=True,
+)
+# --- Configuración de OpenAPI (Swagger UI) ---
+openapi_config = OpenAPIConfig(
+    title="API de Gestión de Usuarios (CyC)",
+    version="1.0.0",
+    description="API de backend para la prueba técnica con autenticación JWT y roles de usuario.",
+)
+
+# --- Creación de la Aplicación Litestar ---
+app = Litestar(
+    #Declración de las rutas a utilizar
+    route_handlers=[
+    Router(
+        path="/api-cyc",
+        route_handlers=[
+            auth_router,
+            user_router
+        ]
+    )
+],
+    on_startup=[init_db],
+    cors_config=cors_config,
+    openapi_config=openapi_config, # Habilita OpenAPI/SwaggerAPI
+)
