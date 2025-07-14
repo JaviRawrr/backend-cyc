@@ -31,4 +31,4 @@ passlib
 argon2-cffi
 python-dotenv
 pydantic[email]==2.11.7
-mysql-connector-python==8.0.30
+#mysql-connector-python==8.0.30
