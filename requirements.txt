@@ -30,5 +30,8 @@ uvicorn
 passlib
 argon2-cffi
 python-dotenv
-pydantic[email]==2.11.7
+pydantic
+pydantic==2.11.7
+email-validator==2.1.1
+
 #mysql-connector-python==8.0.30
