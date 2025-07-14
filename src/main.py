@@ -1,8 +1,8 @@
 from litestar import Litestar, Router
 from src.database import init_db    
 from litestar.config.cors import CORSConfig
-from litestar.openapi.config import OpenAPIConfig #Swagger
-
+from litestar.openapi.config import OpenAPIConfig
+from litestar.openapi.spec import SecurityScheme
 # Importa Routers 
 from src.routes.auth_routes import auth_router
 from src.routes.user_routes import user_router
@@ -18,8 +18,18 @@ cors_config = CORSConfig(
 openapi_config = OpenAPIConfig(
     title="API de Gestión de Usuarios (CyC)",
     version="1.0.0",
-    description="API de backend para la prueba técnica con autenticación JWT y roles de usuario.",
+    description="API con autenticación JWT.",
+    security=[{"bearerAuth": []}],
 )
+
+openapi_config.components.security_schemes = {
+    "bearerAuth": SecurityScheme(
+        type="http",
+        scheme="bearer",
+        bearer_format="JWT",
+        description="Autenticación con token JWT. Usa: Bearer <token>"
+    )
+}
 
 # --- Creación de la Aplicación Litestar ---
 app = Litestar(

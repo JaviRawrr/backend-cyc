@@ -14,7 +14,7 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
     return pwd_context.verify(plain_password, hashed_password)
 
 # --- Define los manejadores de ruta primero con los decoradores de Litestar ---
-@post("/login") # <--- ¡Aquí usamos el decorador 'post' directamente de Litestar!
+@post("/login", tags=["Auth"])
 async def login(data: LoginRequest) -> LoginResponse:
     """
     Autentica a un usuario y retorna un token JWT.
@@ -57,12 +57,13 @@ async def login(data: LoginRequest) -> LoginResponse:
         if conn:
             await conn.close()
 
-@post("/logout") # <--- ¡También usamos el decorador 'post' directamente de Litestar!
+@post("/logout", tags=["Auth"])
 async def logout() -> LogoutResponse:
     """
-    Simula el cierre de sesión del usuario.
+    Cierra sesión (sin estado). El token debe descartarse en el frontend.
     """
     return LogoutResponse(message="Sesión cerrada correctamente")
+
 
 # --- Luego, inicializa el Router CON sus manejadores de ruta ---
 # Esto hace que las funciones 'login' y 'logout' sean parte de 'auth_router',
