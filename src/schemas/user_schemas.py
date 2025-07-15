@@ -4,7 +4,7 @@ from pydantic import BaseModel, EmailStr, StringConstraints
 
 class UserCreate(BaseModel):
     username: Annotated[str, StringConstraints(min_length=3)]
-    password: Annotated[str, StringConstraints(min_length=6)] 
+    password: Annotated[str, StringConstraints(min_length=3)] 
     name: str
     email: EmailStr
     role: str  # admin, supervisor, usuario
@@ -12,7 +12,7 @@ class UserCreate(BaseModel):
 class UserUpdate(BaseModel):
     name: Optional[str] = None
     email: Optional[EmailStr] = None
-    password: Optional[Annotated[str, StringConstraints(min_length=6)]] = None
+    password: Optional[Annotated[str, StringConstraints(min_length=3)]] = None
     role: Optional[Literal["admin", "supervisor", "usuario"]] = None
     
 class UserData(BaseModel):
