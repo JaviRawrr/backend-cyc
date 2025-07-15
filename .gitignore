@@ -1,7 +1,6 @@
 #Carpetas y extensiones ignoradas al subir a git
 # Entorno virtual
 venv/
-.env
 
 # Archivos de caché y compilados
 __pycache__/
