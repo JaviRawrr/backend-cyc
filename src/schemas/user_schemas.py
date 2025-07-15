@@ -10,9 +10,9 @@ class UserCreate(BaseModel):
     role: str  # admin, supervisor, usuario
 
 class UserUpdate(BaseModel):
-    password: Optional[Annotated[str, StringConstraints(min_length=6)]] = None
     name: Optional[str] = None
     email: Optional[EmailStr] = None
+    password: Optional[Annotated[str, StringConstraints(min_length=6)]] = None
     role: Optional[Literal["admin", "supervisor", "usuario"]] = None
     
 class UserData(BaseModel):
